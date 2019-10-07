@@ -1,54 +1,36 @@
 #include <iostream>
-
-using namespace std;
-
-class Character {
-public:
-	void flip() { cout << "I know how to flip and I will flipping do it" << endl; }
-	virtual void walk() { cout << "just in case they are too young to walk yet" << endl; }
-	virtual void fly() = 0; //pure virtual function
-};
-
-class Orc : public Character {
-public:
-	void barrelRoll() { cout << "rooooooolllllllllllinggggggg" << endl; }
-	void walk() { cout << "Doopers have a really cool walk!" << endl; }
-	void fly() { cout << "Dooper is flapping and flying" << endl; }
-};
-
-class Troll : public Character {
-public:
-	void fly() { cout << "Average Dooper is flapping and flying" << endl; }
-};
+#include "Game.h"
 
 int main(void)
 {
-	cout << "Let go virtual" << endl;
-	//Character character;
-	//character.flip();
-	//character.walk();
+	Game game;
 
-	cout << "Let go create an Orc" << endl;
-	Orc orc;
-	orc.walk();
-	orc.fly();
-	orc.flip();
+	std::cout << "Let go virtual" << std::endl;
 
-	cout << "Let go create an Troll" << endl;
-	Troll troll;
-	troll.walk();
-	troll.fly();
-	troll.flip();
+	std::cout << "Let go create an Orc" << std::endl;
 
-	Character* npc = &orc;
-	npc->flip();
-	npc->fly();
-	npc->walk();
 
-	npc = &troll;
-	npc->flip();
-	npc->fly();
-	npc->walk();
+	game.orc.walk();
+	game.orc.fly();
+	game.orc.flip();
+
+	
+	std::cout << "Let go create an Troll" << std::endl;
+
+	game.troll.walk();
+	game.troll.fly();
+	game.troll.flip();
+
+
+	game.npc->flip();
+	game.npc->fly();
+	game.npc->walk();
+
+	game.npc = &game.troll;
+	game.npc->flip();
+	game.npc->fly();
+	game.npc->walk();
 
 	cin.get();
 }
+ 

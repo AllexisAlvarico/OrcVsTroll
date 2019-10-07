@@ -125,6 +125,16 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Orcs.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Shield.h" />
+    <ClInclude Include="Spell.h" />
+    <ClInclude Include="Troll.h" />
+    <ClInclude Include="Weapon.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
