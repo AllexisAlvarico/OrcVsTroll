@@ -22,11 +22,3 @@ public:
 private:
 
 };
-
-Game::Game()
-{
-}
-
-Game::~Game()
-{
-}
