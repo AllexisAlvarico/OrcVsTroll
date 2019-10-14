@@ -9,6 +9,9 @@ int main(void)
 	bool m_trollGame = false;
 	bool m_fighting = false;
 	bool m_raceChoice = true;
+	bool m_playerTurn = true;
+	bool m_npcTurn = true;
+	int m_damage = 0;
 	int m_pick = 0;
 
 
@@ -47,6 +50,7 @@ int main(void)
 			if (m_pick == 1)
 			{
 				game.player->action();
+				m_fighting = true;
 			}
 			else if (m_pick == 2)
 			{
@@ -68,6 +72,7 @@ int main(void)
 			if (m_pick == 1)
 			{
 				game.player->action();
+				m_fighting = true;
 			}
 			else if (m_pick == 2)
 			{
@@ -78,42 +83,31 @@ int main(void)
 			}
 
 		}
-
-
-
 	}
-	
 
 
-	
+	while (m_fighting)
+	{
+		if (m_playerTurn)
+		{
+			game.player->fight();
+		/*	game.npc->damage(m_damage);*/
+			std::cout << "Player's health: " << game.player->health() << "\nEnemy's Health: " << game.npc->health() << std::endl;
+			system("PAUSE");
+			m_playerTurn = false;
+			m_npcTurn = true;
+		}
+		if (m_npcTurn)
+		{
+			m_damage = game.npc->AI();
+		/*	game.player->damage(m_damage);*/
+			std::cout << "Player's health: " << game.player->health() - m_damage << "\nEnemy's Health: " << game.npc->health() << std::endl;
+			system("PAUSE");
+			m_npcTurn = false;
+			m_playerTurn = true;
+		}
+	}
 
-
-	/*std::cout << "Let go virtual" << std::endl;
-
-	std::cout << "Let go create an Orc" << std::endl;
-
-
-	game.orc.walk();
-	game.orc.fly();
-	game.orc.flip();
-
-	
-	std::cout << "Let go create an Troll" << std::endl;
-
-	game.troll.walk();
-	game.troll.fly();
-	game.troll.flip();
-
-
-	game.npc->flip();
-	game.npc->fly();
-	game.npc->walk();
-
-	game.npc = &game.troll;
-	game.npc->flip();
-	game.npc->fly();
-	game.npc->walk();*/
-
-	std::cin.get();
+	system("PAUSE");
 }
  

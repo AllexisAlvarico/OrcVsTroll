@@ -15,7 +15,4 @@ public:
 	Troll troll;
 	Character* player = nullptr;
 	Character* npc = nullptr;
-
-private:
-
 };
