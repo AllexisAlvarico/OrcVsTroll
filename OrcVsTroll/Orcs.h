@@ -23,9 +23,8 @@ public:
 	StatsOrcs stats;
 	int m_choice = 0;
 	void action();
-	void fight();
+	int fight();
 	int AI();
-	int damage(int t_damage);
 	int health();
 	void item();
 };

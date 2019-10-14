@@ -30,7 +30,7 @@ void Orc::action()
 	system("PAUSE");
 }
 
-void Orc::fight()
+int Orc::fight()
 {
 	bool m_picks = true;
 	int m_attack = 0;
@@ -42,7 +42,6 @@ void Orc::fight()
 
 		if (m_choice == 1)
 		{
-
 			int m_chanceToHit = rand() % 10;
 			std::cout << "Attack:\nSword = 1, Staff = 2, Daggers = 3, Bows = 4\n";
 			std::cin >> m_attack;
@@ -59,6 +58,7 @@ void Orc::fight()
 				else
 				{
 					std::cout << "You have miss your target\n";
+					stats.m_damage = 0;
 					m_picks = false;
 					break;
 				}
@@ -75,6 +75,7 @@ void Orc::fight()
 				else
 				{
 					std::cout << "You have miss your target\n";
+					stats.m_damage = 0;
 					m_picks = false;
 					break;
 
@@ -92,6 +93,7 @@ void Orc::fight()
 				else
 				{
 					std::cout << "You have miss your target\n";
+					stats.m_damage = 0;
 					m_picks = false;
 					break;
 				}
@@ -108,6 +110,7 @@ void Orc::fight()
 				else
 				{
 					std::cout << "You have miss your target\n";
+					stats.m_damage = 0;
 					m_picks = false;
 					break;
 				}
@@ -134,12 +137,12 @@ void Orc::fight()
 		}
 
 	}
+	return stats.m_damage;
 }
 
 int Orc::AI()
 {
 	m_choice = rand() % 2 + 1;
-	
 	//Attacks
 	if (m_choice == 1)
 	{
@@ -148,27 +151,22 @@ int Orc::AI()
 		{
 			stats.m_damage = rand() % 5 + 1;
 			std::cout << "The Orc attacked you for " << stats.m_damage << std::endl;
-			return stats.m_damage;
+
 		}
 		else
 		{
-			std::cout << "The Orc attacked you for " << stats.m_damage << std::endl;
-			return stats.m_damage;
+			std::cout << "The Orc attacked and missed you!" << std::endl;
+			stats.m_damage = 0;
 		}
-
 	}
 	//defends
 	else
 	{
 		std::cout << "The Orc defended this turn\n";
-		return 0;
+		stats.m_damage = 0;
 	}
-}
 
-int Orc::damage(int t_damage)
-{
-	stats.m_health -= t_damage;
-	return stats.m_health;
+	return stats.m_damage;
 }
 
 int Orc::health()
@@ -189,18 +187,15 @@ void Orc::item()
 		{
 			stats.m_health += 5;
 			stats.m_healthPotion--;
-			std::cout << "You have healed 5 health";
+			std::cout << "You have healed 5 health\n";
 			system("PAUSE");
-			action();
 		}
 		else
 		{
-			std::cout << "You have no health potions";
-			action();
+			std::cout << "You have no health potions\n";
+			system("PAUSE");
 		}
 	}
-	else
-	{
-		action();
-	}
+
+	system("CLS");
 }

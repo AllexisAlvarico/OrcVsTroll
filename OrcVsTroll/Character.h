@@ -8,9 +8,8 @@ public:
 
 	virtual void action() { std::cout << "You are in the battlefied..."; }
 	virtual void items() { std::cout << "AAYYYYYY"; }
-	virtual void fight() { std::cout << "Fighting lol"; }
+	virtual int fight() { return 0; }
 	virtual int AI() { return 0; }
-	virtual int damage(int &t_damage) { return 0; }
 	virtual int health() { return 0; }
 	virtual void walk() { std::cout << "just in case they are too young to walk yet" << std::endl; }
 };

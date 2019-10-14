@@ -25,7 +25,7 @@ public:
 	StatsTroll stats;
 	void fly() { std::cout << "Average Dooper is flapping and flying" << std::endl; }
 	void walk();
-	void fight();
+	int fight();
 	int AI();
 	int damage(int t_damage);
 	int health();

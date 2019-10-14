@@ -10,7 +10,11 @@ int main(void)
 	bool m_fighting = false;
 	bool m_raceChoice = true;
 	bool m_playerTurn = true;
-	bool m_npcTurn = true;
+	bool m_npcTurn = false;
+	bool m_defeat = false;
+	bool m_win = false;
+	int m_playerHealth = 0;
+	int m_npcHealth = 0;
 	int m_damage = 0;
 	int m_pick = 0;
 
@@ -50,6 +54,8 @@ int main(void)
 			if (m_pick == 1)
 			{
 				game.player->action();
+				m_playerHealth = game.player->health();
+				m_npcHealth = game.npc->health();
 				m_fighting = true;
 			}
 			else if (m_pick == 2)
@@ -72,41 +78,81 @@ int main(void)
 			if (m_pick == 1)
 			{
 				game.player->action();
+				m_playerHealth = game.player->health();
+				m_npcHealth = game.npc->health();
 				m_fighting = true;
 			}
 			else if (m_pick == 2)
 			{
 				m_orcGame = false;
 				m_raceChoice = true;
-				std::cout << "You have died to a Orc attacker for being inactive....\n";
+				std::cout << "You have died to an Orc attacker for being inactive....\n";
 				system("PAUSE");
 			}
 
 		}
 	}
 
-
 	while (m_fighting)
 	{
-		if (m_playerTurn)
+		if (!m_playerHealth <= 0)
 		{
-			game.player->fight();
-		/*	game.npc->damage(m_damage);*/
-			std::cout << "Player's health: " << game.player->health() << "\nEnemy's Health: " << game.npc->health() << std::endl;
-			system("PAUSE");
-			m_playerTurn = false;
-			m_npcTurn = true;
+			if (m_playerTurn)
+			{
+				m_damage = 0;
+				m_damage = game.player->fight();
+				m_npcHealth = m_npcHealth - m_damage;
+				std::cout << "Player's health: " << m_playerHealth << "\nEnemy's Health: " << m_npcHealth << std::endl;
+				system("PAUSE");
+				m_playerTurn = false;
+				m_npcTurn = true;
+			}
 		}
-		if (m_npcTurn)
+
+		if (m_playerHealth < 0)
 		{
-			m_damage = game.npc->AI();
-		/*	game.player->damage(m_damage);*/
-			std::cout << "Player's health: " << game.player->health() - m_damage << "\nEnemy's Health: " << game.npc->health() << std::endl;
-			system("PAUSE");
-			m_npcTurn = false;
-			m_playerTurn = true;
+			m_defeat = true;
+			m_fighting = false;
+			break;
+		}
+
+		if (!m_npcHealth <= 0)
+		{
+			if (m_npcTurn)
+			{
+				m_damage = 0;
+				m_damage = game.npc->AI();
+				m_playerHealth = m_playerHealth - m_damage;
+				std::cout << "Player's health: " << m_playerHealth << "\nEnemy's Health: " << m_npcHealth << std::endl;
+				system("PAUSE");
+				m_npcTurn = false;
+				m_playerTurn = true;
+			}
+		}
+
+		if (m_npcHealth < 0)
+		{
+			m_win = true;
+			m_fighting = false;
+			break;
 		}
 	}
+
+
+	if (m_win)
+	{
+		system("CLS");
+		std::cout << "You have defeated your enemy You win!!!!\n";
+	}
+
+	if (m_defeat)
+	{
+		std::cout << "You had been defeated by your enemy\n";
+	}
+	
+
+
+
 
 	system("PAUSE");
 }
