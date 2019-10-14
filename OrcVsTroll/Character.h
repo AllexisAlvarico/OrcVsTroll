@@ -1,15 +1,17 @@
+/// Name: Allexis Alvarico
+/// Login: C00242855
+/// estimated time: 6hrs
+/// actual time 7hrs
 #include <iostream>
 #pragma once
 
 
 class Character {
 public:
-	void flip() { std::cout << "I know how to flip and I will flipping do it" << std::endl; }
-
-	virtual void action() { std::cout << "You are in the battlefied..."; }
-	virtual void items() { std::cout << "AAYYYYYY"; }
-	virtual int fight() { return 0; }
-	virtual int AI() { return 0; }
-	virtual int health() { return 0; }
-	virtual void walk() { std::cout << "just in case they are too young to walk yet" << std::endl; }
+	virtual void action() { std::cout << "You are in the battlefied..."; } // A holder
+	virtual void items() { std::cout << "AAYYYYYY"; } // A holder
+	virtual int fight() { return 0; } // A holder
+	virtual int AI() { return 0; } // A holder
+	virtual int health() { return 0; } // A holder
+	virtual void walk() { std::cout << "just in case they are too young to walk yet" << std::endl; } // A holder
 };
